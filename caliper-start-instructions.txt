@@ -1,0 +1,13 @@
+
+
+
+
+docker run \
+    -v /home/MsUser/fabric/caliper-workspace:/hyperledger/caliper/workspace \
+    -v /home/MsUser/fabric/BasicNetwork-my-version/crypto-config/:/hyperledger/caliper/crypto-config \
+    --name new_caliper --network="basic-network" -p 7090:7090 --rm -it ubuntu_caliper
+
+cd hy*/ca*/wo*
+
+npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/network-config.yaml \
+--caliper-benchconfig benchmarks/benchmark-config.yaml --caliper-flow-only-test --caliper-fabric-gateway-enabled

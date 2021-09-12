@@ -1,0 +1,51 @@
+test:
+    name: basic-contract-benchmark
+    description: test benchmark with basic-asset-transfer
+    workers:
+      type: local
+      number: 1
+    rounds:
+      - label: readAsset
+        description: Read asset benchmark
+        txDuration: 30
+        rateControl: 
+          # type: benchmarks/fixedRate.js
+          # opts:
+          #   tps: 10
+          # type: fixed-load
+          # opts:
+          #   transactionLoad: 2
+          # type: benchmarks/fixedLoadRate.js
+          # opts:
+          #   transactionLoad: 10
+          type: benchmarks/normalDistributionRate.js
+          opts:
+            standardDeviation: 100
+            mean: 100
+        workload:
+          module: workload/readAsset.js
+          arguments:
+            assets: 10
+            contractId: basic
+      - label: writeAsset
+        description: Write asset benchmark
+        txDuration: 30
+        rateControl: 
+          # type: benchmarks/fixedRate.js
+          # opts:
+          #   tps: 10
+          # type: fixed-load
+          # opts:
+          #   transactionLoad: 2
+          # type: benchmarks/fixedLoadRate.js
+          # opts:
+          #   transactionLoad: 10
+          type: benchmarks/normalDistributionRate.js
+          opts:
+            standardDeviation: 100
+            mean: 100
+        workload:
+          module: workload/writeAsset.js
+          arguments:
+            assets: 10
+            contractId: basic

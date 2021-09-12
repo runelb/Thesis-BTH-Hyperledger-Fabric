@@ -1,0 +1,49 @@
+---
+name: Fabric-Caliper-Test
+version: '1.0.0'
+
+client:
+  organization: Org2
+  connection:
+    timeout:
+      peer:
+        endorser: '300'
+
+organizations:
+  Org2:
+    mspid: Org2MSP
+    peers:
+      - peer0.org2.example.com
+      - peer1.org2.example.com
+    certificateAuthorities:
+      - ca.org2.example.com
+    # adminPrivateKey:
+    #   path: ../BasicNetwork-my-version/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/priv_sk
+    # signedCert:
+    #   path: ../BasicNetwork-my-version/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/Admin@org1.example.com-cert.pem
+
+peers:
+  peer0.org2.example.com:
+    url: peer0.org2.example.com:9051
+    # grpcOptions:
+    #   ssl-target-name-override: peer0.org1.example.com
+    #   grpc.keepalive_time_ms: 600000
+    tlsCACerts:
+      path: ../crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/msp/tlscacerts/tlsca.org2.example.com-cert.pem
+
+  peer1.org2.example.com:
+    url: peer1.org2.example.com::10051
+    # grpcOptions:
+    #   ssl-target-name-override: peer1.org1.example.com
+    #   grpc.keepalive_time_ms: 600000
+    tlsCACerts:
+      path: ../crypto-config/peerOrganizations/org2.example.com/peers/peer1.org2.example.com/msp/tlscacerts/tlsca.org2.example.com-cert.pem
+
+certificateAuthorities:
+  ca.org1.example.com:
+    url: ca.org2.example.com:7054
+    caName: ca.org2.example.com
+    httpOptions:
+      verify: false
+    tlsCACerts:
+      path: ../crypto-config/peerOrganizations/org2.example.com/tlsca/tlsca.org2.example.com-cert.pem
